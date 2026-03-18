@@ -6,23 +6,42 @@ A script that generates a GitHub contribution graph-style heatmap of your Anki d
 
 ## Usage
 
+**Manual update:**
 ```bash
 python3 generate_heatmap.py
 ```
 
-The script reads from the default Anki database path on macOS and writes `heatmap.svg` next to the script.
+Or use the provided shell script, which also commits and pushes:
+```bash
+./update.sh
+```
 
 ### Options
 
 | Flag | Default | Description |
 |------|---------|-------------|
-| `--db PATH` | `~/Library/Application Support/Anki2/User 1/collection.anki2` | Path to Anki collection |
+| `--db PATH` | See platform defaults below | Path to Anki collection |
 | `--out PATH` | `heatmap.svg` (next to script) | Output SVG path |
+
+## Auto-update (macOS)
+
+A Launch Agent can regenerate and push the heatmap daily at 9 AM so your README stays current automatically.
+
+```bash
+./toggle.sh enable    # install — runs daily at 9 AM
+./toggle.sh disable   # uninstall
+./toggle.sh status    # check current state
+```
+
+Requires the machine to be on (or wake from sleep) at 9 AM and `git push` to be authenticated (SSH key or credential helper).
+
+Logs are written to `update.log`.
 
 ## Requirements
 
 - Python 3 (stdlib only — no dependencies)
 - Anki installed with a local collection
+- macOS (auto-update); Windows supported for manual use
 
 ## Platform support
 

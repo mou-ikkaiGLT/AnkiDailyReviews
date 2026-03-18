@@ -9,7 +9,10 @@ import sqlite3
 import sys
 from datetime import timedelta
 
-DB_PATH = "~/Library/Application Support/Anki2/User 1/collection.anki2"
+if sys.platform == "win32":
+    DB_PATH = os.path.join(os.environ.get("APPDATA", ""), "Anki2", "User 1", "collection.anki2")
+else:
+    DB_PATH = "~/Library/Application Support/Anki2/User 1/collection.anki2"
 
 COLORS = [          # checked highest-first
     (201, "#79c0ff"),
